@@ -10,6 +10,10 @@ import Projects from '@/components/Projects';
 import TechStack from '@/components/TechStack';
 import GitHubStats from '@/components/GitHubStats';
 import Contact from '@/components/Contact';
+import SplashCursor from '@/components/SplashCursor';
+
+
+
 
 export default function Home() {
   return (
@@ -102,6 +106,7 @@ export default function Home() {
       <TechStack />
       <GitHubStats />
       <Contact />
+      <SplashCursor />
     </main>
   );
 } 

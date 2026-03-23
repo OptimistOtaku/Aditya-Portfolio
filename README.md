@@ -80,7 +80,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-- Website: [optimistotaku.com](https://optimistotaku.com)
-- Email: contact@optimistotaku.com
+- Website: [optimistotaku.tech](https://optimistotaku.tech)
+- Email: contact@optimistotaku.tech
 - GitHub: [@optimistotaku](https://github.com/optimistotaku)
-- LinkedIn: [OptimistOtaku](https://linkedin.com/in/optimistotaku) 
+- LinkedIn: [OptimistOtaku](https://linkedin.com/in/optimistotaku)

@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://adityasingh.dev', // Default placeholder
+    url: 'https://optimistotaku.tech', // Correct domain
     title: 'Aditya Singh — AI Engineer & Full-Stack Developer',
     description: 'Specializing in AI/ML and building intelligent, scalable systems.',
     siteName: 'Aditya Singh Portfolio',

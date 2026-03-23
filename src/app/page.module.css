@@ -260,11 +260,14 @@
    GENERIC SECTION WRAPPER
    ========================================= */
 .sectionWrapper {
-  padding: 8.5rem 2rem; /* Spacing-24 */
+  padding: 12rem 2rem; /* Increased padding-32 equivalent */
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* Smooth transition from previous section */
+  box-shadow: inset 0 200px 150px -100px rgba(6, 8, 10, 1), 
+              inset 0 -200px 150px -100px rgba(6, 8, 10, 1);
 }
 
 .sectionInner {
@@ -417,7 +420,12 @@
    PROJECTS SECTION (GUILD)
    ========================================= */
 .projectsSection {
-  background-color: var(--surface-container-low);
+  background-color: var(--void);
+  background-image: 
+    radial-gradient(rgba(200, 134, 10, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(6, 8, 10, 1) 0%, rgba(6, 8, 10, 0) 25%, rgba(6, 8, 10, 0) 75%, rgba(6, 8, 10, 1) 100%);
+  background-size: 24px 24px, 100% 100%;
+  background-position: 0 0, 0 0;
 }
 
 /* Bento Grid */
@@ -426,7 +434,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 2px;
   background-color: var(--void); /* Dark gap lines */
-  border: 2px solid var(--void);
+  border: 1px solid var(--void);
 }
 
 @media (max-width: 900px) {
@@ -443,15 +451,15 @@
   text-decoration: none;
   background-size: cover;
   background-position: center;
-  background-blend-mode: overlay;
+  background-blend-mode: soft-light;
 }
 
 /* Project Specific Backgrounds */
-.bgRetinai { background-image: linear-gradient(rgba(17,20,22,0.8), rgba(17,20,22,0.9)), url('/images/project_retinai.png'); }
-.bgBudai { background-image: linear-gradient(rgba(17,20,22,0.8), rgba(17,20,22,0.9)), url('/images/project_budai.png'); }
-.bgGladiator { background-image: linear-gradient(rgba(17,20,22,0.8), rgba(17,20,22,0.9)), url('/images/project_gladiator.png'); }
-.bgFraudeye { background-image: linear-gradient(rgba(17,20,22,0.8), rgba(17,20,22,0.9)), url('/images/project_fraudeye.png'); }
-.bgHangout { background-image: linear-gradient(rgba(17,20,22,0.8), rgba(17,20,22,0.9)), url('/images/project_hangout.png'); }
+.bgRetinai { background-image: linear-gradient(rgba(17,20,22,0.85), rgba(17,20,22,0.95)), url('/images/project_retinai.png'); }
+.bgBudai { background-image: linear-gradient(rgba(17,20,22,0.85), rgba(17,20,22,0.95)), url('/images/project_budai.png'); }
+.bgGladiator { background-image: linear-gradient(rgba(17,20,22,0.85), rgba(17,20,22,0.95)), url('/images/project_gladiator.png'); }
+.bgFraudeye { background-image: linear-gradient(rgba(17,20,22,0.85), rgba(17,20,22,0.95)), url('/images/project_fraudeye.png'); }
+.bgHangout { background-image: linear-gradient(rgba(17,20,22,0.85), rgba(17,20,22,0.95)), url('/images/project_hangout.png'); }
 
 /* Grid Spans */
 .span2v { grid-row: span 2; }
@@ -464,8 +472,40 @@
 }
 
 .projectCard:hover {
-  background-blend-mode: multiply;
-  box-shadow: inset 0 0 40px rgba(200,134,10,0.1);
+  filter: brightness(1.12) contrast(1.05);
+  box-shadow: inset 0 0 80px rgba(0,0,0,0.6), inset 0 0 25px rgba(200,134,10,0.15);
+  transform: translateY(-8px);
+}
+
+.projectCard:hover .projectName {
+  color: var(--spice-pale);
+}
+
+/* =========================================
+   SPICE STORM ANIMATION
+   ========================================= */
+.spiceStormLayer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.15;
+  background-image: 
+    radial-gradient(circle at 20% 30%, var(--spice) 0%, transparent 4px),
+    radial-gradient(circle at 40% 70%, var(--spice) 0%, transparent 3px),
+    radial-gradient(circle at 60% 10%, var(--spice) 0%, transparent 5px),
+    radial-gradient(circle at 80% 90%, var(--spice) 0%, transparent 2px),
+    radial-gradient(circle at 10% 80%, var(--spice) 0%, transparent 4px);
+  background-size: 1000px 1000px;
+  animation: driftSpice 60s linear infinite;
+}
+
+@keyframes driftSpice {
+  from { transform: translate(0, 0); }
+  to { transform: translate(-50%, -50%); }
 }
 
 .projectCard::before {
@@ -575,7 +615,7 @@
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  background-blend-mode: overlay;
+  background-blend-mode: soft-light;
 }
 
 .contactHeading {
@@ -601,9 +641,6 @@
 /* =========================================
    TELEMETRY / DECORATION
    ========================================= */
-.telemetryBlock {
-}
-
 .telemetryGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -745,6 +782,18 @@
   font-size: 0.68rem;
   color: var(--text-muted);
   background-color: var(--void);
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes driftSpice {
+  from { transform: translate(0, 0); }
+  to { transform: translate(-300px, -300px); }
 }
 
 @media (max-width: 600px) {

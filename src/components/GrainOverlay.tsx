@@ -11,7 +11,7 @@ export default function GrainOverlay() {
             numOctaves="3" 
             stitchTiles="stitch" />
         </filter>
-        <rect width="100%" height="100%" filter="url(#noiseFilter)" opacity="0.08" />
+        <rect width="100%" height="100%" filter="url(#noiseFilter)" opacity="0.04" />
       </svg>
     </div>
   )

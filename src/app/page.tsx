@@ -61,6 +61,28 @@ export default function Home() {
   return (
     <main className={styles.main} ref={containerRef}>
       
+      {/* GLOBAL SPICE EFFECTS */}
+      <div className={styles.spiceStormLayer} />
+      
+      {/* Particles (Global) */}
+      {particles.map((p) => (
+        <div 
+          key={p.id}
+          style={{
+            position: 'fixed',
+            left: p.left,
+            bottom: p.bottom,
+            width: p.size,
+            height: p.size,
+            backgroundColor: 'rgba(200,134,10,0.6)',
+            borderRadius: '0',
+            animation: `floatUp 25s linear ${p.delay} infinite`,
+            zIndex: 3,
+            pointerEvents: 'none'
+          }}
+        />
+      ))}
+      
       {/* NAVIGATION */}
       <nav className={`${styles.nav} ${scrolled ? styles.navScrolled : ''}`}>
         <div className={styles.navBrand}>
@@ -80,25 +102,6 @@ export default function Home() {
         <div className={styles.heroSpiceBloom} />
         <div className={styles.heroSuns} />
         <div className={styles.heroRipples} />
-        
-        {/* Particles */}
-        {particles.map((p) => (
-          <div 
-            key={p.id}
-            style={{
-              position: 'absolute',
-              left: p.left,
-              bottom: p.bottom,
-              width: p.size,
-              height: p.size,
-              backgroundColor: 'rgba(200,134,10,0.6)',
-              borderRadius: '0', // Brutalist
-              animation: `floatUp 15s linear ${p.delay} infinite`,
-              zIndex: 2,
-              pointerEvents: 'none'
-            }}
-          />
-        ))}
 
         <motion.div className={styles.heroContent} style={{ y: heroY, opacity: heroOpacity }}>
           <div className={`${styles.heroEyebrow} font-share-tech`}>

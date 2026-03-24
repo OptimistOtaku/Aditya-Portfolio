@@ -24,24 +24,45 @@ const shareTechMono = Share_Tech_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://optimistotaku.tech'),
   title: 'Aditya Singh — AI Engineer & Full-Stack Developer',
   description: 'Full-stack engineer and AI builder crafting intelligent, scalable systems. Specializing in AI/ML, LLM integration, and high-performance full-stack architectures.',
-  keywords: ['AI Engineer', 'Full-Stack Developer', 'Machine Learning', 'Next.js', 'PyTorch', 'Aditya Singh Portfolio', 'Dune Theme Portfolio', 'OptimistOtaku'],
+  keywords: [
+    'Aditya Singh', 
+    'Aditya Singh Portfolio', 
+    'Aditya Singh AI Engineer', 
+    'OPTIMISTOTAKU', 
+    'OptimistOtaku Portfolio',
+    'AI Engineer Arrakis',
+    'Full-Stack Developer', 
+    'Machine Learning Engineer', 
+    'Next.js Portfolio', 
+    'Dune Theme Website',
+  ],
   authors: [{ name: 'Aditya Singh' }],
   creator: 'Aditya Singh',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://optimistotaku.tech', // Correct domain
+    url: 'https://optimistotaku.tech',
     title: 'Aditya Singh — AI Engineer & Full-Stack Developer',
     description: 'Specializing in AI/ML and building intelligent, scalable systems.',
     siteName: 'Aditya Singh Portfolio',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Aditya Singh — AI Engineer Portfolio',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Aditya Singh — AI Engineer & Full-Stack Developer',
     description: 'Building intelligent systems and high-performance full-stack architectures.',
-    creator: '@optimistotaku', // If known
+    creator: '@optimistotaku',
+    images: ['/og-image.png'],
   },
   robots: {
     index: true,

@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import styles from './page.module.css';
 import { FiGithub, FiMail, FiLinkedin, FiTerminal, FiCpu, FiDatabase, FiGlobe, FiCode, FiHexagon, FiBox, FiLayers } from 'react-icons/fi';
+import MagneticWrapper from '@/components/MagneticWrapper';
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
@@ -61,9 +62,6 @@ export default function Home() {
   return (
     <main className={styles.main} ref={containerRef}>
       
-      {/* GLOBAL SPICE EFFECTS */}
-      <div className={styles.spiceStormLayer} />
-      
       {/* Particles (Global) */}
       {particles.map((p) => (
         <div 
@@ -82,7 +80,7 @@ export default function Home() {
           }}
         />
       ))}
-      
+
       {/* NAVIGATION */}
       <nav className={`${styles.nav} ${scrolled ? styles.navScrolled : ''}`}>
         <div className={styles.navBrand}>
@@ -107,9 +105,15 @@ export default function Home() {
           <div className={`${styles.heroEyebrow} font-share-tech`}>
             ◈ HOUSE OPERATIVE // ARRAKIS SECTOR // YEAR 10191
           </div>
-          <h1 className={`${styles.heroName} font-cinzel`}>
+          <motion.h1 
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            whileHover={{ scale: 1.03, y: -5, color: "var(--spice-pale)", textShadow: "0px 15px 30px rgba(200, 134, 10, 0.5)" }}
+            transition={{ type: "spring", stiffness: 120, damping: 12, mass: 0.8 }}
+            className={`${styles.heroName} font-cinzel cursor-default`}
+          >
             ADITYA{'\n'}SINGH
-          </h1>
+          </motion.h1>
           <div className={styles.heroDivider} />
           <div className={`${styles.heroClass} font-share-tech`}>
             AI ENGINEER  ·  FULL-STACK  ·  ML SYSTEMS
@@ -121,12 +125,16 @@ export default function Home() {
             is exactly what it needs to be.
           </p>
           <div className={styles.heroActions}>
-            <a href="#projects" className={styles.btnPrimary}>
-              [ VIEW THE MISSIONS ]
-            </a>
-            <a href="https://github.com/OptimistOtaku" target="_blank" rel="noopener noreferrer" className={styles.btnSecondary}>
-              <FiGithub className="inline mr-2"/> [ GITHUB ARCHIVE ↗ ]
-            </a>
+            <MagneticWrapper>
+              <a href="#projects" className={styles.btnPrimary}>
+                [ VIEW THE MISSIONS ]
+              </a>
+            </MagneticWrapper>
+            <MagneticWrapper>
+              <a href="https://github.com/OptimistOtaku" target="_blank" rel="noopener noreferrer" className={styles.btnSecondary}>
+                <FiGithub className="inline mr-2"/> [ GITHUB ARCHIVE ↗ ]
+              </a>
+            </MagneticWrapper>
           </div>
         </motion.div>
 
@@ -136,14 +144,6 @@ export default function Home() {
           STATUS: AVAILABLE FOR MISSIONS<span className="animate-blink">_</span>
         </div>
         
-        <style dangerouslySetInnerHTML={{__html: `
-          @keyframes floatUp {
-            0% { transform: translateY(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh); opacity: 0; }
-          }
-        `}} />
       </section>
 
       {/* MARQUEE SEPARATOR */}
@@ -277,156 +277,166 @@ export default function Home() {
             <FiLayers /> ◈ CHOAM REGISTRY // MODULE: MISSION_LOG
           </div>
           <h2 className={`${styles.sectionHeading} font-cinzel`}>
-            Selected Operations.
+            SELECTED OPERATIONS.
           </h2>
 
           <div className={styles.bentoGrid}>
 
             {/* RETINAI */}
-            <motion.a 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              href="https://github.com/OptimistOtaku/RetinAI" target="_blank" rel="noopener noreferrer" className={`${styles.projectCard} ${styles.bgRetinai} ${styles.span2v} ${styles.span2h}`}>
-               <div className={styles.projectMesa}>
-                 <span className={styles.missionCode}><FiTerminal className="inline mr-1"/> OP-01 // CLASSIFIED</span>
-                 <span className={`${styles.categoryBadge} font-share-tech`}>[ AI · ML ]</span>
-               </div>
-               <h3 className={styles.projectName}>RETINAI</h3>
-               <div className={`${styles.projectOneLiner} font-cormorant`}>
-                 Multi-disease retinal classification using diffusion model-based anomaly maps.
-               </div>
-               <div className={`${styles.projectDescription} font-cormorant`}>
-                 A medical AI system that detects multiple retinal diseases from fundus images.
-                 Built on a diffusion model pipeline for anomaly map generation, paired with
-                 specialised CNNs per disease class and a meta-classifier that aggregates
-                 outputs for final prediction. Designed for real diagnostic utility — not a toy model.
-               </div>
-               <div className={styles.projectTags}>
-                 <span>PYTHON</span><span>·</span>
-                 <span>PYTORCH</span><span>·</span>
-                 <span>DIFFUSION MODELS</span><span>·</span>
-                 <span>CNN</span><span>·</span>
-                 <span>META-CLASSIFIER</span>
-               </div>
-               <div className={styles.archiveLink}>
-                 &gt;&gt; ACCESS ARCHIVE <span className={styles.archiveLinkArrow}>↗</span>
-               </div>
-            </motion.a>
+            <MagneticWrapper className={`${styles.span2v} ${styles.span2h}`} style={{ display: 'block', height: '100%' }}>
+              <motion.a 
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                href="https://github.com/OptimistOtaku/RetinAI" target="_blank" rel="noopener noreferrer" className={`${styles.projectCard} ${styles.bgRetinai} h-full`}>
+                 <div className={styles.projectMesa}>
+                   <span className={styles.missionCode}><FiTerminal className="inline mr-1"/> OP-01 // CLASSIFIED</span>
+                   <span className={`${styles.categoryBadge} font-share-tech`}>[ AI · ML ]</span>
+                 </div>
+                 <h3 className={styles.projectName}>RETINAI</h3>
+                 <div className={`${styles.projectOneLiner} font-cormorant`}>
+                   Multi-disease retinal classification using diffusion model-based anomaly maps.
+                 </div>
+                 <div className={`${styles.projectDescription} font-cormorant`}>
+                   A medical AI system that detects multiple retinal diseases from fundus images.
+                   Built on a diffusion model pipeline for anomaly map generation, paired with
+                   specialised CNNs per disease class and a meta-classifier that aggregates
+                   outputs for final prediction. Designed for real diagnostic utility — not a toy model.
+                 </div>
+                 <div className={styles.projectTags}>
+                   <span>PYTHON</span><span>·</span>
+                   <span>PYTORCH</span><span>·</span>
+                   <span>DIFFUSION MODELS</span><span>·</span>
+                   <span>CNN</span><span>·</span>
+                   <span>META-CLASSIFIER</span>
+                 </div>
+                 <div className={styles.archiveLink}>
+                   &gt;&gt; ACCESS ARCHIVE <span className={styles.archiveLinkArrow}>↗</span>
+                 </div>
+              </motion.a>
+            </MagneticWrapper>
 
             {/* BUDAI */}
-            <motion.a 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              href="https://github.com/OptimistOtaku/BudAi" target="_blank" rel="noopener noreferrer" className={`${styles.projectCard} ${styles.bgBudai} ${styles.span1}`}>
-               <div className={styles.projectMesa}>
-                 <span className={styles.missionCode}>OP-02 // ACTIVE</span>
-                 <span className={`${styles.categoryBadge} font-share-tech`}>[ AI AGENT ]</span>
-               </div>
-               <h3 className={styles.projectName}>BUDAI</h3>
-               <div className={`${styles.projectOneLiner} font-cormorant`}>
-                 Real-time intelligent AI agent — makes calls, manages tasks, operates autonomously.
-               </div>
-               <div className={`${styles.projectDescription} font-cormorant`}>
-                 A live AI agent that operates in real-time — capable of making calls,
-                 managing tasks, and acting as an always-on personal assistant.
-                 Takes action autonomously.
-               </div>
-               <div className={styles.projectTags}>
-                 <span>AI AGENT</span><span>·</span>
-                 <span>VOICE</span><span>·</span>
-                 <span>LLM</span>
-               </div>
-               <div className={styles.archiveLink}>
-                 &gt;&gt; ACCESS ARCHIVE <span className={styles.archiveLinkArrow}>↗</span>
-               </div>
-            </motion.a>
+            <MagneticWrapper className={styles.span1} style={{ display: 'block', height: '100%' }}>
+              <motion.a 
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                href="https://github.com/OptimistOtaku/BudAi" target="_blank" rel="noopener noreferrer" className={`${styles.projectCard} ${styles.bgBudai} h-full`}>
+                 <div className={styles.projectMesa}>
+                   <span className={styles.missionCode}>OP-02 // ACTIVE</span>
+                   <span className={`${styles.categoryBadge} font-share-tech`}>[ AI AGENT ]</span>
+                 </div>
+                 <h3 className={styles.projectName}>BUDAI</h3>
+                 <div className={`${styles.projectOneLiner} font-cormorant`}>
+                   Real-time intelligent AI agent — makes calls, manages tasks, operates autonomously.
+                 </div>
+                 <div className={`${styles.projectDescription} font-cormorant`}>
+                   A live AI agent that operates in real-time — capable of making calls,
+                   managing tasks, and acting as an always-on personal assistant.
+                   Takes action autonomously.
+                 </div>
+                 <div className={styles.projectTags}>
+                   <span>AI AGENT</span><span>·</span>
+                   <span>VOICE</span><span>·</span>
+                   <span>LLM</span>
+                 </div>
+                 <div className={styles.archiveLink}>
+                   &gt;&gt; ACCESS ARCHIVE <span className={styles.archiveLinkArrow}>↗</span>
+                 </div>
+              </motion.a>
+            </MagneticWrapper>
 
             {/* GLADIATOR ARENA */}
-            <motion.a 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              href="https://github.com/OptimistOtaku/Gladiator-Arena" target="_blank" rel="noopener noreferrer" className={`${styles.projectCard} ${styles.bgGladiator} ${styles.span1}`}>
-               <div className={styles.projectMesa}>
-                 <span className={styles.missionCode}>OP-03 // DEPLOYED</span>
-                 <span className={`${styles.categoryBadge} ${styles.categoryBadgeWeb3} font-share-tech`}>[ WEB3 ]</span>
-               </div>
-               <h3 className={styles.projectName}>GLADIATOR ARENA</h3>
-               <div className={`${styles.projectOneLiner} font-cormorant`}>
-                 On-chain PvP game — win fights, claim opponents' weapons.
-               </div>
-               <div className={`${styles.projectDescription} font-cormorant`}>
-                 A fully on-chain PvP battle game with real economic stakes.
-                 P2P architecture with smart contract enforcement.
-               </div>
-               <div className={styles.projectTags}>
-                 <span>BLOCKCHAIN</span><span>·</span>
-                 <span>SMART CONTRACTS</span>
-               </div>
-               <div className={styles.archiveLink}>
-                 &gt;&gt; ACCESS ARCHIVE <span className={styles.archiveLinkArrow}>↗</span>
-               </div>
-            </motion.a>
+            <MagneticWrapper className={styles.span1} style={{ display: 'block', height: '100%' }}>
+              <motion.a 
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                href="https://github.com/OptimistOtaku/Gladiator-Arena" target="_blank" rel="noopener noreferrer" className={`${styles.projectCard} ${styles.bgGladiator} h-full`}>
+                 <div className={styles.projectMesa}>
+                   <span className={styles.missionCode}>OP-03 // DEPLOYED</span>
+                   <span className={`${styles.categoryBadge} ${styles.categoryBadgeWeb3} font-share-tech`}>[ WEB3 ]</span>
+                 </div>
+                 <h3 className={styles.projectName}>GLADIATOR ARENA</h3>
+                 <div className={`${styles.projectOneLiner} font-cormorant`}>
+                   On-chain PvP game — win fights, claim opponents' weapons.
+                 </div>
+                 <div className={`${styles.projectDescription} font-cormorant`}>
+                   A fully on-chain PvP battle game with real economic stakes.
+                   P2P architecture with smart contract enforcement.
+                 </div>
+                 <div className={styles.projectTags}>
+                   <span>BLOCKCHAIN</span><span>·</span>
+                   <span>SMART CONTRACTS</span>
+                 </div>
+                 <div className={styles.archiveLink}>
+                   &gt;&gt; ACCESS ARCHIVE <span className={styles.archiveLinkArrow}>↗</span>
+                 </div>
+              </motion.a>
+            </MagneticWrapper>
 
             {/* FRAUDEYE */}
-            <motion.a 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              href="https://github.com/OptimistOtaku/fraudeye" target="_blank" rel="noopener noreferrer" className={`${styles.projectCard} ${styles.bgFraudeye} ${styles.span1}`}>
-               <div className={styles.projectMesa}>
-                 <span className={styles.missionCode}>OP-04 // OPERATIONAL</span>
-                 <span className={`${styles.categoryBadge} ${styles.categoryBadgeMuted} font-share-tech`}>[ ML SYSTEMS ]</span>
-               </div>
-               <h3 className={styles.projectName}>FRAUDEYE</h3>
-               <div className={`${styles.projectOneLiner} font-cormorant`}>
-                 Hybrid ML + rule-based fraud detection API.
-               </div>
-               <div className={`${styles.projectDescription} font-cormorant`}>
-                 A system combining machine learning models with deterministic
-                 rule engines — capturing both pattern-based anomalies and hard logic.
-               </div>
-               <div className={styles.projectTags}>
-                 <span>PYTHON</span><span>·</span>
-                 <span>FASTAPI</span><span>·</span>
-                 <span>SCIKIT-LEARN</span>
-               </div>
-               <div className={styles.archiveLink}>
-                 &gt;&gt; ACCESS ARCHIVE <span className={styles.archiveLinkArrow}>↗</span>
-               </div>
-            </motion.a>
+            <MagneticWrapper className={styles.span1} style={{ display: 'block', height: '100%' }}>
+              <motion.a 
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                href="https://github.com/OptimistOtaku/fraudeye" target="_blank" rel="noopener noreferrer" className={`${styles.projectCard} ${styles.bgFraudeye} h-full`}>
+                 <div className={styles.projectMesa}>
+                   <span className={styles.missionCode}>OP-04 // OPERATIONAL</span>
+                   <span className={`${styles.categoryBadge} ${styles.categoryBadgeMuted} font-share-tech`}>[ ML SYSTEMS ]</span>
+                 </div>
+                 <h3 className={styles.projectName}>FRAUDEYE</h3>
+                 <div className={`${styles.projectOneLiner} font-cormorant`}>
+                   Hybrid ML + rule-based fraud detection API.
+                 </div>
+                 <div className={`${styles.projectDescription} font-cormorant`}>
+                   A system combining machine learning models with deterministic
+                   rule engines — capturing both pattern-based anomalies and hard logic.
+                 </div>
+                 <div className={styles.projectTags}>
+                   <span>PYTHON</span><span>·</span>
+                   <span>FASTAPI</span><span>·</span>
+                   <span>SCIKIT-LEARN</span>
+                 </div>
+                 <div className={styles.archiveLink}>
+                   &gt;&gt; ACCESS ARCHIVE <span className={styles.archiveLinkArrow}>↗</span>
+                 </div>
+              </motion.a>
+            </MagneticWrapper>
 
             {/* HANGOUT HERO */}
-            <motion.a 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              href="https://github.com/OptimistOtaku/HangOut-Hero" target="_blank" rel="noopener noreferrer" className={`${styles.projectCard} ${styles.bgHangout} ${styles.span3h}`}>
-               <div className={styles.projectMesa}>
-                 <span className={styles.missionCode}>OP-05 // DEPLOYED</span>
-                 <span className={`${styles.categoryBadge} ${styles.categoryBadgeMuted} font-share-tech`}>[ FULL-STACK ]</span>
-               </div>
-               <h3 className={styles.projectName}>HANGOUT-HERO</h3>
-               <div className={`${styles.projectOneLiner} font-cormorant`}>
-                 AI itinerary generator — real-time plans built on mood, location, and group preferences.
-               </div>
-               <div className={`${styles.projectDescription} font-cormorant`}>
-                 Generates personalised real-time hangout itineraries by combining user mood,
-                 live location data, group size, and preferences.
-                 Powered by OpenAI with live maps integration.
-               </div>
-               <div className={styles.projectTags}>
-                 <span>TYPESCRIPT</span><span>·</span>
-                 <span>OPENAI</span><span>·</span>
-                 <span>MAPS API</span><span>·</span>
-                 <span>NEXT.JS</span>
-               </div>
-               <div className={styles.archiveLink}>
-                 &gt;&gt; ACCESS ARCHIVE <span className={styles.archiveLinkArrow}>↗</span>
-               </div>
-            </motion.a>
+            <MagneticWrapper className={styles.span3h} style={{ display: 'block', height: '100%' }}>
+              <motion.a 
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                href="https://github.com/OptimistOtaku/HangOut-Hero" target="_blank" rel="noopener noreferrer" className={`${styles.projectCard} ${styles.bgHangout} h-full`}>
+                 <div className={styles.projectMesa}>
+                   <span className={styles.missionCode}>OP-05 // DEPLOYED</span>
+                   <span className={`${styles.categoryBadge} ${styles.categoryBadgeMuted} font-share-tech`}>[ FULL-STACK ]</span>
+                 </div>
+                 <h3 className={styles.projectName}>HANGOUT-HERO</h3>
+                 <div className={`${styles.projectOneLiner} font-cormorant`}>
+                   AI itinerary generator — real-time plans built on mood, location, and group preferences.
+                 </div>
+                 <div className={`${styles.projectDescription} font-cormorant`}>
+                   Generates personalised real-time hangout itineraries by combining user mood,
+                   live location data, group size, and preferences.
+                   Powered by OpenAI with live maps integration.
+                 </div>
+                 <div className={styles.projectTags}>
+                   <span>TYPESCRIPT</span><span>·</span>
+                   <span>OPENAI</span><span>·</span>
+                   <span>MAPS API</span><span>·</span>
+                   <span>NEXT.JS</span>
+                 </div>
+                 <div className={styles.archiveLink}>
+                   &gt;&gt; ACCESS ARCHIVE <span className={styles.archiveLinkArrow}>↗</span>
+                 </div>
+              </motion.a>
+            </MagneticWrapper>
 
           </div>
 
@@ -492,15 +502,21 @@ export default function Home() {
             transition={{ delay: 0.3 }}
             className={styles.contactLinksWrap}
           >
-            <a href="https://github.com/OptimistOtaku" target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
-              <FiGithub className={styles.contactLinkSymbol} /> GITHUB ARCHIVE
-            </a>
-            <a href="mailto:optimistotaku@gmail.com" className={styles.contactLink}>
-              <FiMail className={styles.contactLinkSymbol} /> EMAIL CHANNEL
-            </a>
-            <a href="https://www.linkedin.com/in/adityasinghop/" target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
-              <FiLinkedin className={styles.contactLinkSymbol} /> LINKEDIN RELAY
-            </a>
+            <MagneticWrapper className="w-full max-w-[380px]">
+              <a href="https://github.com/OptimistOtaku" target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
+                <FiGithub className={styles.contactLinkSymbol} /> GITHUB ARCHIVE
+              </a>
+            </MagneticWrapper>
+            <MagneticWrapper className="w-full max-w-[380px]">
+              <a href="mailto:optimistotaku@gmail.com" className={styles.contactLink}>
+                <FiMail className={styles.contactLinkSymbol} /> EMAIL CHANNEL
+              </a>
+            </MagneticWrapper>
+            <MagneticWrapper className="w-full max-w-[380px]">
+              <a href="https://www.linkedin.com/in/adityasinghop/" target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
+                <FiLinkedin className={styles.contactLinkSymbol} /> LINKEDIN RELAY
+              </a>
+            </MagneticWrapper>
           </motion.div>
 
           <motion.div 

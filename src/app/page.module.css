@@ -28,7 +28,7 @@
 }
 
 .navBrand {
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   letter-spacing: 0.25em;
   display: flex;
   align-items: center;
@@ -49,7 +49,7 @@
 }
 
 .navLink {
-  font-size: 0.72rem;
+  font-size: 0.85rem;
   color: var(--text-muted);
   text-decoration: none;
   transition: 0.3s;
@@ -479,33 +479,6 @@
 
 .projectCard:hover .projectName {
   color: var(--spice-pale);
-}
-
-/* =========================================
-   SPICE STORM ANIMATION
-   ========================================= */
-.spiceStormLayer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 200%;
-  pointer-events: none;
-  z-index: 3;
-  opacity: 0.15;
-  background-image: 
-    radial-gradient(circle at 20% 30%, var(--spice) 0%, transparent 4px),
-    radial-gradient(circle at 40% 70%, var(--spice) 0%, transparent 3px),
-    radial-gradient(circle at 60% 10%, var(--spice) 0%, transparent 5px),
-    radial-gradient(circle at 80% 90%, var(--spice) 0%, transparent 2px),
-    radial-gradient(circle at 10% 80%, var(--spice) 0%, transparent 4px);
-  background-size: 1000px 1000px;
-  animation: driftSpice 60s linear infinite;
-}
-
-@keyframes driftSpice {
-  from { transform: translate(0, 0); }
-  to { transform: translate(-50%, -50%); }
 }
 
 .projectCard::before {

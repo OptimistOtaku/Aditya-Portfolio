@@ -3,6 +3,7 @@ import { Cinzel, Cormorant_Garamond, Share_Tech_Mono } from 'next/font/google'
 import './globals.css'
 import GrainOverlay from '@/components/GrainOverlay'
 import DuneCursor from '@/components/DuneCursor'
+import { Analytics } from '@vercel/analytics/next'
 
 const cinzel = Cinzel({ 
   subsets: ['latin'],
@@ -81,7 +82,8 @@ export default function RootLayout({
         <GrainOverlay />
         <DuneCursor />
         {children}
+        <Analytics />
       </body>
     </html>
   )
-}
+}

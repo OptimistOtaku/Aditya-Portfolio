@@ -78,10 +78,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${cinzel.variable} ${cormorant.variable} ${shareTechMono.variable}`}>
       <body>
+        <a href="#main-content" className="skip-link">SKIP TO CONTENT</a>
         <GrainOverlay />
         <DuneCursor />
         {children}
       </body>
     </html>
   )
-}
+}

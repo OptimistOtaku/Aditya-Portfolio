@@ -1,13 +1,24 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 export default function DuneCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [canUseCustomCursor, setCanUseCustomCursor] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
+    const finePointer = window.matchMedia('(pointer: fine)').matches;
+    setCanUseCustomCursor(finePointer && !shouldReduceMotion);
+  }, [shouldReduceMotion]);
+
+  useEffect(() => {
+    if (!canUseCustomCursor) {
+      return;
+    }
+
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -28,7 +39,11 @@ export default function DuneCursor() {
       window.removeEventListener('mousemove', updateMousePosition);
       window.removeEventListener('mouseover', handleMouseOver);
     };
-  }, []);
+  }, [canUseCustomCursor]);
+
+  if (!canUseCustomCursor) {
+    return null;
+  }
 
   return (
     <>

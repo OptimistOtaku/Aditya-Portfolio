@@ -1,14 +1,15 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import styles from './page.module.css';
-import { FiGithub, FiMail, FiLinkedin, FiTerminal, FiCpu, FiDatabase, FiGlobe, FiCode, FiHexagon, FiBox, FiLayers } from 'react-icons/fi';
+import { FiGithub, FiMail, FiLinkedin, FiTerminal, FiCpu, FiDatabase, FiGlobe, FiCode, FiHexagon, FiBox, FiLayers, FiBookOpen, FiArrowRight, FiClock, FiTag } from 'react-icons/fi';
 import MagneticWrapper from '@/components/MagneticWrapper';
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -16,9 +17,9 @@ export default function Home() {
   });
 
   // Parallax transforms
-  const heroY = useTransform(scrollYProgress, [0, 0.5], [0, 300]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-  const projectsY = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const heroY = useTransform(scrollYProgress, [0, 0.5], shouldReduceMotion ? [0, 0] : [0, 300]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.2], shouldReduceMotion ? [1, 1] : [1, 0]);
+  const projectsY = useTransform(scrollYProgress, [0, 1], shouldReduceMotion ? [0, 0] : [0, -100]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,6 +33,11 @@ export default function Home() {
   const [particles, setParticles] = useState<Array<{id: number, left: string, bottom: string, delay: string, size: string}>>([]);
   
   useEffect(() => {
+    if (shouldReduceMotion) {
+      setParticles([]);
+      return;
+    }
+
     const newParticles = Array.from({ length: 80 }).map((_, i) => ({
       id: i,
       left: `${Math.random() * 100}%`,
@@ -40,7 +46,7 @@ export default function Home() {
       size: `${Math.max(1, Math.random() * 3)}px`
     }));
     setParticles(newParticles);
-  }, []);
+  }, [shouldReduceMotion]);
 
   const systems = [
     { name: 'TYPESCRIPT', icon: <FiTerminal /> },
@@ -60,7 +66,7 @@ export default function Home() {
   ];
 
   return (
-    <main className={styles.main} ref={containerRef}>
+    <main className={styles.main} id="main-content" ref={containerRef}>
       
       {/* Particles (Global) */}
       {particles.map((p) => (
@@ -90,7 +96,8 @@ export default function Home() {
         <div className={styles.navLinks}>
           <a href="#about" className={styles.navLink}>I. THE OPERATIVE</a>
           <a href="#projects" className={styles.navLink}>II. THE MISSIONS</a>
-          <a href="#contact" className={styles.navLink}>III. TRANSMIT</a>
+          <a href="#blog" className={styles.navLink}>III. THE CHRONICLES</a>
+          <a href="#contact" className={styles.navLink}>IV. TRANSMIT</a>
         </div>
       </nav>
 
@@ -465,6 +472,171 @@ export default function Home() {
           </motion.div>
 
         </motion.div>
+      </section>
+
+      {/* BLOG SECTION (THE CHRONICLES) */}
+      <section className={`${styles.sectionWrapper} ${styles.blogSection} vignette-bg`} id="blog">
+        <div className={styles.sectionInner}>
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className={`${styles.sectionLabel} ${styles.sectionLabelSpice} font-share-tech flex items-center gap-2`}
+          >
+            <FiBookOpen /> ◈ SPICE ARCHIVES // MODULE: FIELD_CHRONICLES
+          </motion.div>
+          <motion.h2 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className={`${styles.sectionHeading} font-cinzel`}
+          >
+            DISPATCHES FROM{' '}<br/>THE DEEP DESERT.
+          </motion.h2>
+
+          <div className={styles.blogGrid}>
+
+            {/* THE EGO GATE — FEATURED (Substack + Medium) */}
+            <MagneticWrapper className={`${styles.blogFeatured}`} style={{ display: 'block', height: '100%' }}>
+              <motion.a
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                href="https://optimistotaku.substack.com/p/the-ego-gate"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${styles.blogCard} ${styles.blogFeatured} h-full`}
+              >
+                <div className={styles.blogCardInner}>
+                  <div className={styles.blogMeta}>
+                    <div className={styles.blogMetaLeft}>
+                      <span className={`${styles.blogCategory} font-share-tech`}><FiTag className="inline mr-1" />AI RESEARCH</span>
+                      <span className={`${styles.blogPlatform} ${styles.platformSubstack} font-share-tech`}>SUBSTACK</span>
+                      <span className={`${styles.blogPlatform} ${styles.platformMedium} font-share-tech`}>MEDIUM</span>
+                    </div>
+                    <span className={`${styles.blogDate} font-share-tech`}><FiClock className="inline mr-1" />12 MIN READ</span>
+                  </div>
+                  <h3 className={`${styles.blogTitle} font-cinzel`}>The Ego Gate — Why AI Needs to Learn What Not to Learn</h3>
+                  <p className={`${styles.blogExcerpt} font-cormorant`}>
+                    Intelligence without a filter is not intelligence. Every AI system ever trained lives closer 
+                    to a vessel for noise than you think. The Ego Gate is a framework built on three principles 
+                    — Doubt, Curiosity, and Arrogance — that teaches neural networks to selectively ignore, 
+                    buffer, and dream. A new approach to the stability-plasticity dilemma.
+                  </p>
+                  <div className={styles.blogQuoteBlock}>
+                    <span className="font-cormorant italic">&quot;How do we make AI choose what not to learn? Because intelligence 
+                    without a filter is a very expensive mirror.&quot;</span>
+                  </div>
+                  <div className={styles.blogFooter}>
+                    <span className={`${styles.blogReadMore} font-share-tech`}>
+                      READ FULL CHRONICLE <FiArrowRight className={`inline ${styles.blogArrow}`} />
+                    </span>
+                    <span className={`${styles.blogIndex} font-share-tech`}>CHR-001</span>
+                  </div>
+                </div>
+                <div className={styles.blogGlowLine} />
+              </motion.a>
+            </MagneticWrapper>
+
+            {/* HANGOUT HERO — Medium */}
+            <MagneticWrapper style={{ display: 'block', height: '100%' }}>
+              <motion.a
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                href="https://medium.com/@optimistotaku"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${styles.blogCard} h-full`}
+              >
+                <div className={styles.blogCardInner}>
+                  <div className={styles.blogMeta}>
+                    <div className={styles.blogMetaLeft}>
+                      <span className={`${styles.blogCategory} ${styles.blogCategoryGuild} font-share-tech`}><FiTag className="inline mr-1" />FULL-STACK</span>
+                      <span className={`${styles.blogPlatform} ${styles.platformMedium} font-share-tech`}>MEDIUM</span>
+                    </div>
+                    <span className={`${styles.blogDate} font-share-tech`}><FiClock className="inline mr-1" />5 MIN READ</span>
+                  </div>
+                  <h3 className={`${styles.blogTitle} font-cinzel`}>Hangout Hero — Your AI Itinerary Generator</h3>
+                  <p className={`${styles.blogExcerpt} font-cormorant`}>
+                    It started from a personal problem — we wanted an app that optimises weekend plans 
+                    around mood, budget, and group preferences. So we built one. Powered by Gemini 2.5 Pro, 
+                    it generates a personalised hangout itinerary in under 60 seconds.
+                  </p>
+                  <div className={styles.blogFooter}>
+                    <span className={`${styles.blogReadMore} font-share-tech`}>
+                      READ FULL CHRONICLE <FiArrowRight className={`inline ${styles.blogArrow}`} />
+                    </span>
+                    <span className={`${styles.blogIndex} font-share-tech`}>CHR-002</span>
+                  </div>
+                </div>
+                <div className={styles.blogGlowLine} />
+              </motion.a>
+            </MagneticWrapper>
+
+            {/* MORE COMING — Placeholder */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className={styles.blogCardPlaceholder}
+            >
+              <div className={styles.blogCardInner}>
+                <div className={`${styles.blogPlaceholderIcon}`}>
+                  <FiBookOpen />
+                </div>
+                <h3 className={`${styles.blogPlaceholderTitle} font-cinzel`}>MORE DISPATCHES<br/>INCOMING</h3>
+                <p className={`${styles.blogPlaceholderText} font-share-tech`}>
+                  // NEW CHRONICLES IN TRANSMISSION<br/>
+                  // SUBSCRIBE TO INTERCEPT
+                </p>
+              </div>
+            </motion.div>
+
+          </div>
+
+          {/* PLATFORM CTAs */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className={styles.blogCTAWrap}
+          >
+            <MagneticWrapper>
+              <a href="https://optimistotaku.substack.com" target="_blank" rel="noopener noreferrer" className={styles.blogCTA}>
+                <FiBookOpen className="text-[var(--spice)]" />
+                <span className="font-share-tech">SUBSCRIBE ON SUBSTACK</span>
+                <FiArrowRight />
+              </a>
+            </MagneticWrapper>
+            <MagneticWrapper>
+              <a href="https://medium.com/@optimistotaku" target="_blank" rel="noopener noreferrer" className={`${styles.blogCTA} ${styles.blogCTAMedium}`}>
+                <FiBookOpen className="text-[var(--guild)]" />
+                <span className="font-share-tech">READ ON MEDIUM</span>
+                <FiArrowRight />
+              </a>
+            </MagneticWrapper>
+          </motion.div>
+
+          {/* BLOG TELEMETRY */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className={styles.blogTelemetry}
+          >
+            <div className="font-share-tech text-[0.65rem] text-[var(--text-muted)] flex items-center gap-3">
+              <FiBookOpen className="text-[var(--spice)]" />
+              ARCHIVE STATUS: 2 CHRONICLES INDEXED · PLATFORMS: SUBSTACK + MEDIUM · CLEARANCE: PUBLIC
+              <span className="animate-blink ml-1">_</span>
+            </div>
+          </motion.div>
+
+        </div>
       </section>
 
       {/* CONTACT SECTION */}

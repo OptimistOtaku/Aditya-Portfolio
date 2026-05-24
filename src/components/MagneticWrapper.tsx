@@ -1,15 +1,20 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 export default function MagneticWrapper({ children, className, style }: { children: React.ReactNode, className?: string, style?: React.CSSProperties }) {
   const ref = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const shouldReduceMotion = useReducedMotion();
 
   const handleMouse = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (shouldReduceMotion || !ref.current) {
+      return;
+    }
+
     const { clientX, clientY } = e;
-    const { height, width, left, top } = ref.current!.getBoundingClientRect();
+    const { height, width, left, top } = ref.current.getBoundingClientRect();
     const middleX = clientX - (left + width / 2);
     const middleY = clientY - (top + height / 2);
     // Pull factor (smaller is less pull)

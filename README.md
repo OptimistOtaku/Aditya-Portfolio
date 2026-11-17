@@ -1,86 +1,46 @@
-# OptimistOtaku Portfolio
+# Aditya Singh — Arrakis portfolio
 
-A stunning dark mode portfolio website built with Next.js, TypeScript, and Tailwind CSS. Features a futuristic coder aesthetic with 3D animations, smooth transitions, and interactive elements.
+A Next.js and TypeScript portfolio that descends from the surface of Arrakis into a sietch. GSAP coordinates the layered scroll transitions; a Three.js scene blends a sandworm and its traveling wake into the hero landscape. Content remains server-rendered and usable without WebGL.
 
-## Features
+## Run locally
 
-- 🎨 Modern dark mode design with neon accents
-- 🎮 Interactive 3D avatar using Three.js
-- ⚡ Smooth scroll-based animations with Framer Motion
-- 📱 Fully responsive layout
-- 🎯 Animated typing effect for technologies
-- 📊 GitHub stats integration
-- 📝 Terminal-style contact form
-- 🚀 Performance optimized
-
-## Tech Stack
-
-- **Framework:** Next.js 14
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS
-- **Animations:** Framer Motion
-- **3D:** Three.js, React Three Fiber
-- **Icons:** React Icons
-- **Deployment:** Vercel
-
-## Getting Started
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/optimistotaku/portfolio.git
-   cd portfolio
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Run the development server:
-   ```bash
-   npm run dev
-   ```
-
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-## Project Structure
-
-```
-src/
-├── app/
-│   ├── layout.tsx
-│   ├── page.tsx
-│   └── globals.css
-├── components/
-│   ├── About.tsx
-│   ├── Projects.tsx
-│   ├── TechStack.tsx
-│   ├── GitHubStats.tsx
-│   └── Contact.tsx
-└── public/
-    ├── avatar.glb
-    └── projects/
+```sh
+npm ci
+npm run dev
 ```
 
-## Customization
+Open http://localhost:3000. Sound is off until explicitly enabled. Reduced-motion visitors receive the static environment. Rendering pauses when scenes are off-screen or the tab is hidden.
 
-1. Update personal information in the components
-2. Replace the 3D avatar model in `public/avatar.glb`
-3. Add your project images to `public/projects/`
-4. Modify the color scheme in `tailwind.config.js`
-5. Update GitHub stats by changing the username in `GitHubStats.tsx`
+## Validate
 
-## Contributing
+```sh
+npm run lint
+npx tsc --noEmit
+npm run build
+```
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+When building alongside an active development server, set `PORTFOLIO_DIST_DIR=.next-production` for both build and production start to isolate the output. PowerShell: `$env:PORTFOLIO_DIST_DIR='.next-production'`.
 
-## License
+## Content and assets
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Edit `src/lib/content.ts` for projects, archive entries, and social links. Featured projects have static `/projects/[slug]` case studies. The sitemap is generated from those records.
 
-## Contact
+Project images in `public/images/cloudswitch.png` and `greg.png`, and the Ego Gate benchmark figure, come from Aditya's public source repositories. Other project visuals are explicitly labeled explanatory diagrams. Environmental geometry and ambient audio are generated locally; there are no external audio services or autoplay.
 
-- Website: [optimistotaku.tech](https://optimistotaku.tech)
-- Email: contact@optimistotaku.tech
-- GitHub: [@optimistotaku](https://github.com/optimistotaku)
-- LinkedIn: [OptimistOtaku](https://linkedin.com/in/optimistotaku)
+Recognition labels include user-confirmed team placements at Innovortex 3.0 and AICraft 3.1, the linked Code Cubicle team announcement, and user-confirmed finalist appearances. The unverified event participation count is omitted.
+
+## Arrakis visual system
+
+The centered name uses original SVG letterforms informed by the geometric 2021 film title, with a hover glow. The name remains an accessible heading. A shared sandstone environment and a fixed upward-flowing spice layer continue through the homepage. Particle density is reduced on mobile; reduced-motion visitors receive a static composition. The procedural Three.js worm travels horizontally beneath the dunes during the opening descent.
+
+Film lettering reference: https://commons.wikimedia.org/wiki/File:Dune_2021_logo.png
+
+## Living daylight and the sandworm
+
+A one-minute solar cycle runs across the site, including project pages. It counts active viewing time only and pauses in hidden tabs. Night lasts six seconds; most of the cycle is daylight, with dawn and dusk between them. The suns rise in the east, follow a forward arc, and set in the west. Their position resets while they are fully hidden at night. Lighting affects the sky, both suns, stars, dunes, the worm, and light entering the sietch. There are no daylight controls.
+
+The sandworm is a long continuous mesh with a mostly buried head and a briefly exposed armored back. GSAP smooths its scroll-driven passage. GPU deformation bends the body along the same dune field as the surrounding sand, with pressure mounds, trailing wakes, and cascading dust. Geometry and normals are not rebuilt on the CPU each frame, and rendering follows the display refresh rate without a frame-skipping cap. It has no click action, label, or menu. Reduced motion uses a static composition; when WebGL is unavailable, the layered desert remains intact.
+
+Motion reference: [DNEG’s sandworm and sand simulation breakdown for Dune: Part Two](https://www.dneg.com/news/return-to-arrakis-for-a-closer-look-at-our-work-on-dune-part-two). Film imagery is referenced, not shipped with the site.
+
+The existing solar checks cover timing, phase continuity, and hidden-tab behavior.

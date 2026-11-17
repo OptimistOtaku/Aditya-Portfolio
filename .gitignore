@@ -6,3 +6,10 @@ build/
 *.log
 .DS_Store
 portfolio-content-dune.md
+.next-production/
+*.tsbuildinfo
+artifacts/
+.next-revision/
+.next-live/
+work/codex-cleanup/
+.next-push/

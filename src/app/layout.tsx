@@ -1,31 +1,16 @@
-import type { Metadata } from 'next'
-import { Cinzel, Cormorant_Garamond, Share_Tech_Mono } from 'next/font/google'
-import './globals.css'
-import GrainOverlay from '@/components/GrainOverlay'
-import DuneCursor from '@/components/DuneCursor'
-
-const cinzel = Cinzel({ 
-  subsets: ['latin'],
-  weight: ['700', '900'],
-  variable: '--font-cinzel'
-})
-
-const cormorant = Cormorant_Garamond({ 
-  subsets: ['latin'],
-  weight: ['300', '400', '600'],
-  style: ['normal', 'italic'],
-  variable: '--font-cormorant'
-})
-
-const shareTechMono = Share_Tech_Mono({ 
-  subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-share-tech'
-})
+import type { Metadata } from 'next';
+import '@fontsource/cormorant-garamond/latin-400.css';
+import '@fontsource/cormorant-garamond/latin-400-italic.css';
+import '@fontsource/cormorant-garamond/latin-300-italic.css';
+import '@fontsource/manrope/latin-400.css';
+import '@fontsource/manrope/latin-600.css';
+import '@fontsource/share-tech-mono/latin-400.css';
+import './globals.css';
+import { SolarProvider } from '@/components/SolarCycle';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://optimistotaku.tech'),
-  title: 'Aditya Singh — AI Engineer & Full-Stack Developer',
+  title: 'Aditya Singh — AI / ML Engineer',
   description: 'Full-stack engineer and AI builder crafting intelligent, scalable systems. Specializing in AI/ML, LLM integration, and high-performance full-stack architectures.',
   keywords: [
     'Aditya Singh', 
@@ -33,11 +18,11 @@ export const metadata: Metadata = {
     'Aditya Singh AI Engineer', 
     'OPTIMISTOTAKU', 
     'OptimistOtaku Portfolio',
-    'AI Engineer Arrakis',
+    'Continual Learning',
     'Full-Stack Developer', 
     'Machine Learning Engineer', 
     'Next.js Portfolio', 
-    'Dune Theme Website',
+    'AI Research',
   ],
   authors: [{ name: 'Aditya Singh' }],
   creator: 'Aditya Singh',
@@ -45,7 +30,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://optimistotaku.tech',
-    title: 'Aditya Singh — AI Engineer & Full-Stack Developer',
+    title: 'Aditya Singh — AI / ML Engineer',
     description: 'Specializing in AI/ML and building intelligent, scalable systems.',
     siteName: 'Aditya Singh Portfolio',
     images: [
@@ -59,7 +44,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Aditya Singh — AI Engineer & Full-Stack Developer',
+    title: 'Aditya Singh — AI / ML Engineer',
     description: 'Building intelligent systems and high-performance full-stack architectures.',
     creator: '@optimistotaku',
     images: ['/og-image.png'],
@@ -76,12 +61,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${cinzel.variable} ${cormorant.variable} ${shareTechMono.variable}`}>
+    <html lang="en">
       <body>
         <a href="#main-content" className="skip-link">SKIP TO CONTENT</a>
-        <GrainOverlay />
-        <DuneCursor />
-        {children}
+
+
+        <SolarProvider>{children}</SolarProvider>
       </body>
     </html>
   )

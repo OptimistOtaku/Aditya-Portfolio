@@ -1,9 +1,23 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
+import { shareImage, sharePlayer } from '@/lib/share';
 import { projects, archive, socials } from '@/lib/content';
 import Journey, { DesertBackdrop } from '@/components/Journey';
 import DuneName from '@/components/DuneName';
 import ProjectCard from '@/components/ProjectCard';
 import SiteNav from '@/components/SiteNav';
+export const metadata: Metadata = {
+  twitter: {
+    card: 'player',
+    site: '@OptimistOtaku',
+    creator: '@OptimistOtaku',
+    title: 'Aditya Singh — AI / ML Engineer',
+    description: 'Intelligent systems, research, and open-source work. Explore a portfolio from Arrakis.',
+    images: [shareImage],
+    players: [sharePlayer],
+  },
+  other: { 'twitter:player:stream:content_type': 'video/mp4' },
+};
 export default function Home(){return <><SiteNav/><main id="main-content"><Journey/>
 <section className="hero" id="home"><DesertBackdrop/><div className="hero-copy"><DuneName/><p className="hero-role">AI / ML ENGINEER</p><div className="hero-links"><a className="button" href="#work">Explore my work </a><a className="quiet-link" href="#contact">Get in touch </a></div></div><div className="hero-bottom"><a href="#work">SCROLL TO DESCEND <span aria-hidden="true">↓</span></a></div></section>
 <div className="passage" id="passage" aria-hidden="true"><div className="passage-rock left"/><div className="passage-light"/><div className="passage-rock right"/></div>

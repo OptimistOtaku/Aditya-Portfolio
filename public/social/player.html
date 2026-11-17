@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Aditya Singh — Arrakis preview</title>
+  <style>
+    html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#111412}
+    video{display:block;width:100%;height:100%;object-fit:contain}
+    video:focus-visible{outline:2px solid #f1dbaf;outline-offset:-3px}
+  </style>
+</head>
+<body>
+  <video id="preview" controls muted loop playsinline preload="metadata"
+    poster="/social/arrakis-card-v2.png" aria-label="Aditya Singh. A silent Arrakis scene with twin suns, rising spice, and softly glowing lettering.">
+    <source src="/social/arrakis-loop-v2.mp4" type="video/mp4">
+    <a href="/social/arrakis-loop-v2.mp4">Watch the silent portfolio preview</a>
+  </video>
+  <script>
+    const preview = document.getElementById('preview');
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    if (!reducedMotion.matches) preview.play().catch(() => {});
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) preview.pause();
+    });
+    reducedMotion.addEventListener('change', event => {
+      if (event.matches) preview.pause();
+    });
+  </script>
+</body>
+</html>

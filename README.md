@@ -44,3 +44,14 @@ The sandworm is a long continuous mesh with a mostly buried head and a briefly e
 Motion reference: [DNEG’s sandworm and sand simulation breakdown for Dune: Part Two](https://www.dneg.com/news/return-to-arrakis-for-a-closer-look-at-our-work-on-dune-part-two). Film imagery is referenced, not shipped with the site.
 
 The existing solar checks cover timing, phase continuity, and hidden-tab behavior.
+
+
+## Social link previews
+
+The homepage advertises an X Player Card with a silent eight-second Arrakis video and an accessible 1200 × 630 PNG poster. Other pages retain large-image cards. Assets are versioned under `public/social/`; the lightweight, responsive `/social/player.html` contains only the native media player. It respects reduced motion, starts muted, provides playback controls, and pauses in hidden tabs. X decides when and where its clients display the player; the PNG is the fallback. The old square image is retained for cached links.
+
+After deployment, share `https://www.optimistotaku.tech/?share=arrakis-v2` to give crawlers a fresh page URL. Existing posts and composer drafts can retain previously cached previews.
+
+The render script is `scripts/generate-share-preview.py`; it is an offline authoring tool, not a Python runtime or build dependency. The committed PNG and MP4 are sufficient for deployment. It requires Pillow, NumPy, FontTools and imageio-ffmpeg.
+
+References: [X Player Card specification (archived official documentation)](https://web.archive.org/web/20260204163853/https://developer.x.com/en/docs/x-for-websites/cards/overview/player-card), [current X Cards policy](https://docs.x.com/developer-terms/policy#x-cards).
